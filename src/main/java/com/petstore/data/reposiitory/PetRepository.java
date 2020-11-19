@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PetRepository extends JpaRepository<Pet, Integer> {
-
+  void findByStoreId(Integer store_id);
 }
