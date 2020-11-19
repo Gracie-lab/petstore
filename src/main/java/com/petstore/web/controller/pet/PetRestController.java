@@ -27,7 +27,7 @@ public class PetRestController {
             petService.savePet(pet);
         }
         catch(NullPointerException e){
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());\
         }
         //save request
 
