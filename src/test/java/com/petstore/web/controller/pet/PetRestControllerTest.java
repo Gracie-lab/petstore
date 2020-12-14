@@ -7,10 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.transaction.Transactional;
+
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -21,6 +24,7 @@ class PetRestControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+    ObjectMapper mapper = new ObjectMapper();
 
     @BeforeEach
     void setUp() {
@@ -34,7 +38,7 @@ class PetRestControllerTest {
         pet.setBreed("dog");
         pet.setAge(3);
 
-        ObjectMapper mapper = new ObjectMapper();
+//        ObjectMapper mapper = new ObjectMapper();
 
 
         this.mockMvc.perform(post("/pet/create")
@@ -43,5 +47,25 @@ class PetRestControllerTest {
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andReturn();
+    }
+
+
+    @Test
+    void whenICallTheGetPetMethodThenGetAPetObject() throws Exception {
+
+        this.mockMvc.perform(get("/pet/getPet"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+//
+//                .content(mapper.writeValueAsString(pet)))
+
+    }
+
+    @Test
+    void deletePetApiWorks() throws Exception {
+        this.mockMvc.perform(delete("/pet/deletePet/32"))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 }

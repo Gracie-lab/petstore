@@ -1,6 +1,7 @@
 package com.petstore.data.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
 import org.hibernate.engine.internal.Cascade;
@@ -27,6 +28,7 @@ public class Pet {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @ToString.Exclude
+    @JsonIgnore
     private Store store;
 
 

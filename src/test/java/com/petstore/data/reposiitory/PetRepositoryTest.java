@@ -152,10 +152,10 @@ class PetRepositoryTest {
     @Test
     @Rollback(value = false)
     void whenIDeletePetFromDatabasePetIsDeleted(){
-        assertThat(petRepository.existsById(32)).isTrue();
+        assertThat(petRepository.existsById(22)).isTrue();
 
-        petRepository.deleteById(32);
-        assertThat(petRepository.existsById(32)).isFalse();
+        petRepository.deleteById(22);
+        assertThat(petRepository.existsById(22)).isFalse();
     }
 
 }

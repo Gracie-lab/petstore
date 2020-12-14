@@ -47,7 +47,7 @@ class PetServiceImplTest {
     }
 
     @Test
-    void mockTheDeleteByIdTest(){
+    void mockTheDeleteByIdTest() throws Exception {
         doNothing().when(petRepository).deleteById(2);
         petService.deletePetById(2);
 
